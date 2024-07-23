@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        <h2>今天天氣很{{info}}</h2>
+        <button @click="chageWeather">切換天氣</button>
+
+    </div>
+    <!-- Vue實例 -->
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                isHot: true
+            },
+            computed: {
+                info() {
+                    return this.isHot ? '炎熱' : '涼爽'
+                }
+            },
+            methods: {
+                chageWeather() {
+                    this.isHot = !this.isHot
+                }
+            },
+            // 監視
+            watch: {
+                // data屬性、計算屬性都可以監視
+                info: {
+                    // 初始化時讓handler調用一下
+                    immediate: true,
+                    // handler什麽時候調用?當isHot發生改變時
+                    // 這個函數有兩個參數,第一個參數新值，第二個參數之前的值
+                    handler(newValue, oldValue) {
+                        console.log('info被改變了', newValue, oldValue)
+                    }
+                }
+            }
+        });
+
+        // 實例化後,另外一種監視方式
+        vm.$watch('isHot', {
+            handler(newValue, oldValue) {
+                console.log('ishot被改變了', newValue, oldValue)
+            }
+        })
+    </script>
+</body>
+
+</html>

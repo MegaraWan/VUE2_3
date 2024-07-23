@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        姓：<input type="text" v-model="firstName"> <br />
+        名：<input type="text" v-model="lastName"> <br />
+
+        <!-- 如果以後業務更多,那麽這里要寫的東西更加覆雜，不推薦 -->
+        全名:<span>{{firstName.slice(0,3)}}-{{lastName}}</span>
+
+    </div>
+    <script>
+        new Vue({
+            el: "#root",
+            data: {
+                firstName: '張',
+                lastName: '三'
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>

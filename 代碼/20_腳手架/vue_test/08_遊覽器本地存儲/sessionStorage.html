@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <h2>sessionStorage</h2>
+    <button onclick="saveData()">點我保存數據</button>
+    <button onclick="readData()">點我讀取數據</button>
+    <button onclick="deleteData()">點我刪除數據</button>
+    <button onclick="deleteAllDate()">點我清空數據</button>
+
+
+    <script>
+        let p = { name: '張三', age: 22 }
+        function saveData() {
+            sessionStorage.setItem('msg', 'hello')
+            // 666會被轉換成字符串類型
+            sessionStorage.setItem('msg2', 666)
+            // 存儲對象到本地存儲需要使用JSON.stringfy方法;不然存儲到本地存儲里的內容會變成不認識的[object Object],而可認識的字符串形式
+            sessionStorage.setItem('person', JSON.stringify(p))
+        }
+
+        function readData() {
+            console.log(sessionStorage.getItem('msg'));
+            console.log(sessionStorage.getItem('msg2'));
+            const result = sessionStorage.getItem('person')
+            console.log(JSON.parse(result));
+            console.log(result);
+        }
+
+        function deleteData() {
+            // 刪除指定的
+            sessionStorage.removeItem('msg2')
+
+        }
+        function deleteAllDate() {
+            sessionStorage.clear()
+        }   
+    </script>
+</body>
+
+</html>

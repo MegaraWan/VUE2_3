@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        <h2>人員列表</h2>
+        <input type="text" placeholder="請輸入名字" v-model="keyWord">
+        <ul>
+            <li v-for="(p,index) in filePersons" :key="p.id">{{p.name}}-{{p.age}}-{{p.sex}}</li>
+        </ul>
+
+    </div>
+    <!-- Vue實例 -->
+    <script>
+        // 使用watch實現
+        /* const vm = new Vue({ 
+            el: "#root",
+            data: {
+                // 使用v-model獲得用戶輸入的信息,keyWord接收數據
+                keyWord: "",
+                // 原數據不能動,如果過濾了原數據那麽數據就越來越少
+                persons: [
+                    { id: '001', name: '馬冬梅', age: 18, sex: '女' },
+                    { id: '002', name: '周傑倫', age: 19, sex: '男' },
+                    { id: '003', name: '周冬雨', age: 20, sex: '女' },
+                    { id: '004', name: '溫兆倫', age: 20, sex: '男' },
+                ],
+                filePersons: [],
+            },
+            methods: {},
+            watch: {
+                // 監視屬性有兩種寫法,簡單和完整
+                // 建議從簡單寫起,不行再改成完整的寫法
+                keyWord: {
+                    // 立即執行一次
+                    immediate: true,
+                    // 要執行的操作
+                    handler(val) {
+                        // filter數組過濾方法
+                        this.filePersons = this.persons.filter((p) => {
+                            return p.name.indexOf(val) !== -1
+                        })
+
+                    }
+                }
+            }
+
+        });
+        */
+
+        // 使用compute實現
+        const vm2 = new Vue({
+            el: "#root",
+            data: {
+                keyWord: "",
+                persons: [
+                    { id: '001', name: '馬冬梅', age: 18, sex: '女' },
+                    { id: '002', name: '周傑倫', age: 19, sex: '男' },
+                    { id: '003', name: '周冬雨', age: 20, sex: '女' },
+                    { id: '004', name: '溫兆倫', age: 20, sex: '男' },
+                ]
+            },
+            computed: {
+                filePersons() {
+                    // filePerson規定的返回值，返回給filePersons，filePersons會掛載到data上
+                    return this.persons.filter((p) => {
+                        // filter規定的返回值,返回新的數組
+                        return p.name.indexOf(this.keyWord) !== -1
+                    })
+                }
+            }
+
+
+
+        })
+
+    </script>
+</body>
+
+</html>

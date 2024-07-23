@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        姓：<input type="text" v-model="firstName"> <br />
+        名：<input type="text" v-model="lastName"> <br />
+        <!-- fullName也在vm身上,可以直接使用插值語法 -->
+        全名:<span>{{fullName}}</span> <br />
+        全名:<span>{{fullName}}</span> <br />
+        全名:<span>{{fullName}}</span> <br />
+        全名:<span>{{fullName}}</span> <br />
+        <!-- 以上有四個fullName，但是只調用了一次fullname -->
+
+
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                firstName: '張',
+                lastName: '三'
+            },
+            // 計算屬性：通過已有屬性得到的屬性
+            // 計算屬性,配置方法和data類似
+            computed: {
+                fullName: {
+                    // get作用：當有人讀取fullName時,get就會被調用,且返回值作為fullName的值。
+                    // get什麽時候調用？
+                    // 1.初次讀取fullName，後面再調用走緩存（前提,依賴的數據沒發生改變）
+                    // 2.所依賴的數據發生變化時,重新調用
+                    //**注意methods方法沒有緩存,寫了幾個就要調用幾次**
+                    get() {
+                        console.log('get被調用了');
+                        // 此處的this是vm,使用this獲得data掛在到vm上的屬性
+                        return this.firstName + '-' + this.lastName
+                    },
+
+                    // 什麽時候調用set?當fullName被修改時
+                    // 手動修改了fullName,通過fullName接收到了新值
+                    // 需要要新值返回到fullName依賴的數據上，也就是vm掛在data屬性的數據上，
+                    set(value) {
+                        console.log('set', value)
+                        const arr = value.split('-') // 字符串轉數組
+                        this.firstName = arr[0]
+                        this.lastName = arr[1]
+0
+                    }
+                }
+            }
+
+
+        });
+    </script>
+</body>
+
+</html>

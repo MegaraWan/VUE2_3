@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        <h2 v-once>初始化的n值是:{{n}}</h2>
+        <h2>當前的n值是:{{n}}</h2>
+        <button @click="n++">點我n++</button>
+    </div>
+    <!-- Vue實例 -->
+    <script>
+        new Vue({
+            el: "#root",
+            data: {
+                n: 1,
+            }
+        });
+    </script>
+</body>
+
+</html>

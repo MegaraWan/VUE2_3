@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        <div>{{name}}</div>
+        <div>{{str}}</div>
+
+        <div v-text="name"></div>
+        <div v-text="str"></div>
+    </div>
+    <!-- Vue實例 -->
+    <script>
+        new Vue({
+            el: "#root",
+            data: {
+                name:'尚矽谷',
+                str:'<h3>你好</h3>'
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>

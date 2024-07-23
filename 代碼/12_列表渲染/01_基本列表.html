@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        <!-- v-for遍歷,寫在誰身上遍歷誰,長度是多少就遍歷多少次 -->
+        <!-- 第一個參數val,第二個參數index -->
+
+        <!-- 遍歷數組 -->
+        <h2>人員列表</h2>
+        <ul>
+
+
+            <!-- p是形參,代表persons中的每一個數據 -->
+            <!-- p in persons 類似 js中的 for in語句 -->
+            <!-- key唯一標識 -->
+            <!-- <li v-for="p in persons" :key="p.id">{{p.name}}-{{p.age}}</li> -->
+
+            <!-- p是數據中的值,index是所在的索引 -->
+            <li v-for="(p,index) in persons" :key="index">{{p.name}}-{{p.age}}-{{index}}</li>
+
+        </ul>
+
+        <!-- 遍歷對象 -->
+        <h2>汽車信息</h2>
+        <ul>
+            <li v-for="(val,key) in car" :key="key">{{val}}-{{key}}</li>
+        </ul>
+
+        <!-- 遍歷字符串,少 --> 
+        <h2>hello</h2>
+        <ul>
+            <li v-for="(val,index) in s" :key="index">{{val}}-{{index}}</li>
+        </ul>
+
+        <!-- 遍歷指定次數,少 -->
+        <h2>遍歷指定次數</h2>
+        <ul>
+            <li v-for="(val,index) in 5" :key="index">{{val}}-{{index}}</li>
+        </ul>
+
+
+
+    </div>
+    <!-- Vue實例 -->
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                persons: [
+                    { id: '001', name: '張三', age: 18 },
+                    { id: '002', name: '李四', age: 19 },
+                    { id: '003', name: '王五', age: 20 },
+                ],
+                car: {
+                    name: '奧迪A8',
+                    price: '70萬',
+                    color: '黑色'
+                },
+                s:'hello',
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>

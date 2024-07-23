@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        <!-- 第三步,編寫組件標簽 -->
+        <school></school>
+        <hello></hello>
+        <hr>
+        <!-- 第三步,編寫組件標簽 -->
+        <student></student>
+        <student></student>
+
+        <!-- 上面兩個組件之間修改data里的值不會互相影響 -->
+
+        <h2>{{msg}}</h2>
+
+    </div>
+
+    <div id="root2">
+        <hello></hello>
+    </div>
+    <!-- Vue實例 -->
+    <script>
+
+        // 創建school組件
+        const school = Vue.extend(
+            {
+                template: `
+                <div>
+                    <h2>學校名稱：{{schoolname}}</h2>
+                    <h2>學校地址：{{address}}</h2>
+                    <button @click='showName'>點我提示學校名</button>
+                    </div>
+                `,
+                data() {
+                    return {
+                        schoolname: '尚矽谷',
+                        address: '北京'
+                    }
+                },
+                methods: {
+                    showName() {
+                        alert(this.schoolname)
+                    }
+                },
+            }
+        )
+
+        // 創建student組件
+        const student = Vue.extend(
+            {
+                template: `
+                <div>
+                    <h2>學生姓名：{{studentname}}</h2>
+                    <h2>學校年齡：{{age}}</h2>
+                </div>
+                `,
+                data() {
+                    return {
+                        studentname: '李華',
+                        age: 18
+                    }
+                }
+            }
+        )
+
+        const hello = Vue.extend(
+            {
+                template: `
+                    <div>
+                        <h2>hello</h2>  
+                    </div>
+                `
+            }
+        )
+        // 全局注冊組件
+        // 語法：小括號里不寫對象，而是用逗號的方式
+        Vue.component('hello', hello)
+
+        new Vue({
+            el: "#root",
+            data: {
+                msg: '你好啊'
+            },
+            // 第二步,注冊組件；局部注冊
+            components: {
+                // 右邊是創建的組件,告訴vue去哪里找
+                // 左邊是注冊組件
+                // 如果二者名字相同,可以只寫一個名字；JS對象語法。
+                school,
+                student,
+
+            }
+        });
+
+        new Vue({
+            el:'#root2'
+        })
+
+
+        // data對象的方式,x1和x2的值相互影響
+        // const data = {
+        //     a: 1,
+        //     b: 2
+        // }
+        // const x1 = data
+        // const x2 = data
+        // console.log(x1)  // {a:1,b:2}
+        // console.log(x2)  // {a:1,b:2}
+        // x1.a = 99
+        // console.log(x1)  // {a:99,b:2}
+        // console.log(x2)  // {a:99,b:2}
+
+        // data函數的方式,x1和x2的值不相互影響
+        // function data(){
+        //     return {
+        //         a: 1,
+        //         b: 2
+        //     }
+        // }
+        // const x1= data()
+        // const x2 = data()
+        // console.log(x1)  // {a:1,b:2}
+        // console.log(x2)  // {a:1,b:2}
+        // x1.a = 99
+        // console.log(x1)  // {a:99,b:2}
+        // console.log(x2)  // {a:1,b:2}
+
+    </script>
+</body>
+
+</html>

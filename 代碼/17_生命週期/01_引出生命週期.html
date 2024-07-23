@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        <!-- 因為css屬性名和屬性值重名,所以可以只寫一個;""里面是JS表達式,
+            里面是一個對象可以使用對象的簡寫形式 -->
+        <!-- <h2 :style="{opacity:opacity}">歡迎學習Vue</h2> -->
+        <h2 :style="{opacity}">歡迎學習Vue</h2>
+
+    </div>
+    <!-- Vue實例 -->
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                opacity: 1,
+            },
+            methods: {
+
+            },
+            // 什麽時候調用？
+            // Vue完成模板解析 並把真實的DOM元素放入頁面後（掛在元素）調用mounted
+            // 只調用一次
+            mounted() {
+                setInterval(() => {
+                    this.opacity -= 0.01
+                    if (this.opacity <= 0) {
+                        this.opacity = 1
+                    }
+                }, 16)
+            }
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入Vue -->
+    <script src="./js/vue.js"></script>
+  </head>
+
+  <body>
+    <!-- 安裝live server -->
+    <div id="root">
+      <!-- {{}}不是解構賦值,就是規定的一個符號 -->
+
+      <h1>Hello,{{name}}</h1>
+    </div>
+    <h1>
+      <!-- 容器以外使用這個語法,不會接受到數據 -->
+      {{name}}
+    </h1>
+
+    <script>
+      // 調整全局配置
+      Vue.config.productionTip = false; // 阻止Vue啟動時的生產提示
+
+      // 創建Vue實例
+      // 括號里的內容是配置對象
+      // 配置對象要求：key不能隨便更改，value的數據類型要滿足要求
+      new Vue({
+        // el建立了容器和實例的關系
+        // el後內容一般都是id選擇器,類選擇器也可以
+        el: "#root", //el用於指定當前Vue實例為哪個容器服務，值通常為CSS選擇器字符串
+        // 另外一種指定容器的寫法,沒有上面的簡單和常用
+        // el:document.querySelector('#id')
+
+        // data存儲數據，僅供el所指定的容器去使用
+        // 暫時先寫成對象的形式,後面還需要改
+        data: {
+          name: "尚矽谷",
+        },
+      });
+    </script>
+  </body>
+</html>

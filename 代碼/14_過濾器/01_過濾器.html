@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script src="../js/dayjs.min.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        <h2>顯示格式化後的時間</h2>
+        <h3>現在是:{{time}}</h3>
+        <!-- 計算屬性實現 -->
+        <h3>現在是:{{fmtTime}}</h3>
+        <!-- method實現,在插值語法中調用函數,里面只要是JS表達式都可以 -->
+        <h3>現在是:{{getFmtTime()}}</h3>
+        <!-- 過濾器實現 -->
+        <h3>現在是:{{time | timeFormater }}</h3>
+
+        <!-- 多個過濾器串聯 -->
+        <h3>現在是:{{time | timeFormater | mySlice}}</h3>
+
+
+    </div>
+    <!-- Vue實例 -->
+    <script>
+        new Vue({
+            el: "#root",
+            data: {
+                time: 1621561377603
+            },
+            methods: {
+                getFmtTime() {
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+                }
+
+            },
+            // 計算屬性實現
+            computed: {
+                fmtTime() {
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            // 過濾器的本質就是一個函數
+            filters: {
+                timeFormater(value) {
+                    console.log('@', value);
+                    return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+                },
+                mySlice(value) {
+                    return value.slice(0, 4)
+
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

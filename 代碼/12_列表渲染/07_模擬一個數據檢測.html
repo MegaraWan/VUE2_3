@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+    </div>
+    <!-- Vue實例 -->
+    <script>
+        let data = {
+            name: '尚矽谷',
+            address: '北京'
+        }
+
+        // 創建一個檢測的實例對象
+        const obs = new Observer(data)
+        console.log(obs);
+
+        function Observer(obj) {
+
+
+        }
+
+
+    </script>
+</body>
+
+</html>

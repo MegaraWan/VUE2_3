@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        姓：<input type="text" v-model="firstName"> <br />
+        名：<input type="text" v-model="lastName"> <br />
+        <!-- 綁定事件的時候小括號加不加都行 -->
+        <!-- 但是現在是插值,需要的是返回值所以必須加小括號 -->
+        全名:<span>{{fullName()}}</span>
+
+
+    </div>
+    <script>
+        new Vue({
+            el: "#root",
+            data: {
+                firstName: '張',
+                lastName: '三'
+            },
+            methods: {
+                fullName() {
+                    return this.firstName + '-' + this.lastName
+                }
+
+            }
+        });
+    </script>
+</body>
+
+</html>

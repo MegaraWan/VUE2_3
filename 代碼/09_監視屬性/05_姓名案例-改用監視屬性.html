@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        姓：<input type="text" v-model="firstName"> <br />
+        名：<input type="text" v-model="lastName"> <br />
+        <!-- 計算屬性不寫() -->
+        全名:<span>{{fullName}}</span> <br />
+    </div>
+
+    <!-- vue實例 -->
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                firstName: '張',
+                lastName: '三',
+                // 監視方法需要再準備一個全名屬性,讓容器獲取
+                // 計算屬性方法自身會有新屬性，所以不用再data處添加新屬性
+                fullName: '張-三'
+            },
+            watch: {
+                firstName(newValue, oldValue) {
+                    this.fullName = newValue + "-" + this.lastName
+                },
+                lastName(val){
+                    this.fullName = this.firstName + '-' + val
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

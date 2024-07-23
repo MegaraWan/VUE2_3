@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>歡迎來到{{name}}學習</h1>
+        <!-- 當點擊button的時候,就去找showInfo函數 -->
+        <button v-on:click="showInfo">點我提示信息1</button>
+        <!-- 簡寫方式 -->
+        <button @click="showInfo">點我提示信息2</button>
+    </div>
+    <script>
+
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                name: '尚矽谷'
+            },
+            methods: {
+                // 對象里配置方法,直接寫方法名和小括號，不用寫function
+                showInfo(e) {
+                    // e：事件對象
+                    // e.target發生事件的事件對象
+                    console.log(e.target)
+                    // 此處的this是vm實例對象；【注意】如果寫了箭頭函數this就不指向vm了
+                    console.log(this)
+                    alert('同學你好')
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

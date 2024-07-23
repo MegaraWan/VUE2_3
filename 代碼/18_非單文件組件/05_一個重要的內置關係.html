@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        
+    </div>
+    <!-- Vue實例 -->
+    <script>
+
+        /* 原型對象和對象原型覆習 */
+        // // 創建構造函數
+        // function Demo() {
+        //     this.a = 1
+        //     this.b = 2
+        // }
+        // // 創建一個Demo實例對象
+        // const d = new Demo()
+        // // 函數的prototype和實例的__proto__指向同一個同喜。
+        // console.log(Demo.prototype)  // 顯示原型屬性
+        // console.log(d.__proto__)     // 隱式原型屬性
+
+
+        // // 程序員通過顯示原型屬性操作原型
+        // // 一般來說：程序員通過顯示原型屬性放東西，通過隱式原始屬性找東西
+        // Demo.prototype.x = 99
+        // console.log('@', d.__proto__.x)  // 這種寫法太覆雜
+        // console.log('@', d.x)  // 底層查找機制會自動去原型上查找
+        // console.log(d)
+
+
+        Vue.prototype.x = 1000
+        // 定義shchool組件
+        const school = Vue.extend({
+            name: 'school',
+            template: `
+            <div>
+                <h2>學校名稱：{{name}}</h2>
+                <h2>學校地址：{{addr}}</h2>
+                <button @click='showX'>點我顯示x</button>
+                </div>      
+            `,
+            data() {
+                return {
+                    name: '尚矽谷',
+                    addr: '北京'
+                }
+            },
+            methods:{
+                showX(){
+                    // 調用即使用組件名的標簽，就會自動創建實例對象
+                    console.log(this);
+                    console.log(this.x);
+                }
+            }
+
+        })
+
+        // 創建一個vm
+        const vm = new Vue({
+            el: '#root',
+            template:'<school></school>',
+            data: { msg: '你好' },
+            components:{school}
+        })
+
+
+        // school就是VueCompoenent
+        console.log(school.prototype.__proto__ === Vue.prototype);
+    </script>
+</body>
+
+</html>

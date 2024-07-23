@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        <h2 :style="{opacity}">歡迎學習Vue</h2>
+        <button @click="stop">停止變化</button>
+       
+    </div>
+    <!-- Vue實例 -->
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                opacity: 1,
+            },
+            methods: {
+                stop() {
+                    // clearInterval(this.timer)
+                    this.$destroy();
+                }
+
+            },
+            mounted() {
+                this.timer = setInterval(() => {
+                    this.opacity -= 0.01
+                    console.log('timer')
+                    if (this.opacity <= 0) {
+                        this.opacity = 1
+                    }
+                }, 16)
+            },
+            // 停止定時器寫在即將被關閉的地方
+            beforeDestroy() {
+                // 因為有可能是被他殺的,沒辦法關閉在stop中
+                // 只要走銷毀流程,不管自殺還是他殺,就在這里善後
+                console.log('vm即將被銷毀')
+                clearInterval(this.timer)
+            },
+
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+
+
+    </div>
+    <!-- Vue實例 -->
+    <script>
+        // 定義student組件
+        const student = Vue.extend({
+            name: 'student',
+            template: `
+            <div>
+                <h2>學生名稱：{{name}}</h2>
+                <h2>學生年齡：{{age}}</h2>
+            </div>      
+            `,
+            data() {
+                return {
+                    name: '李華',
+                    age: '18'
+                }
+
+            },
+        })
+
+        // 定義shchool組件
+        const school = Vue.extend({
+            name: 'school',
+            template: `
+            <div>
+                <h2>學校名稱：{{name}}</h2>
+                <h2>學校地址：{{addr}}</h2>
+                <student><student/>
+            </div>      
+            `,
+            data() {
+                return {
+                    name: '尚矽谷',
+                    addr: '北京'
+                }
+            },
+            components: {
+                student
+            }
+        })
+
+        // 定義hello組件
+        const hello = Vue.extend({
+            name: 'hello',
+            template: `<h1>{{msg}}</h1>`,
+            data() {
+                return {
+                    msg: '歡迎學習VUE'
+                }
+            }
+        })
+
+        // 定義app組件，一人之下萬人之上
+        const app = Vue.extend({
+            template: `
+                <div>
+                    <hello></hello>
+                    <school></school>
+
+                </div>
+            `,
+            components: {
+                school,
+                hello
+            }
+        })
+
+        // 創建vm
+        new Vue({
+            // Vue實例也可以寫template，html結構
+            // 寫可以不寫,直接將<app></app>寫在容器的模板代碼中
+            template: ` <app></app>`,
+            el: "#root",
+            // 注冊組件 局部
+            components: {
+                app
+            }
+        });
+    </script>
+</body>
+
+</html>

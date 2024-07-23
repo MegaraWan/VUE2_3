@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        姓：<input type="text" v-model="firstName"> <br />
+        名：<input type="text" v-model="lastName"> <br />
+        <!-- 計算屬性不寫() -->
+        全名:<span>{{fullName}}</span> <br />
+    </div>
+
+    <!-- vue實例 -->
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                firstName: '張',
+                lastName: '三'
+            },
+            computed: {
+                /* // 完整寫法
+                fullName: {
+                    get() {
+                        return this.firstName + '-' + this.lastName
+                    },
+                    set(value) {
+                        const arr = value.split('-')
+                        this.firstName = arr[0]
+                        this.lastName = arr[1]
+                    }
+                } */
+
+                // 簡寫
+                // 可簡寫前提：沒有set方法時
+                fullName(){
+                    return this.firstName + '-' + this.lastName
+                }
+
+            }
+        });
+    </script>
+
+</body>
+
+</html>

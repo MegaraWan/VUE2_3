@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入JS模塊 -->
+    <script src="../js/vue.js"></script>
+  </head>
+
+  <body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+      <!-- 普通寫法 -->
+      <!-- 單向數據綁定: <input type="text" v-bind:value="name"><br />
+        雙向數據綁定: <input type="text" v-model:value="name"> -->
+
+      <!-- 簡寫 -->
+      單向數據綁定: <input type="text" v-bind:value="name" /><br />
+      雙向數據綁定: <input type="text" v-model="name" />
+
+      <h1 v-bind:x="name">你好啊</h1>
+      <!-- 錯誤寫法,v-model只能用於表單元素（輸入類元素,有value值的） -->
+      <!-- 因為只有有value屬性才能捕獲到用戶的輸入，進而影響數據的變化 -->
+      <h1 v-model:x="name">你好啊</h1>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#root",
+        data: {
+          name: "尚矽谷",
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        <h2>今天天氣很{{info}}</h2>
+        <button @click="chageWeather">切換天氣</button>
+        <hr />
+
+        <!-- 需求:監測a但是不檢測b -->
+        <h3>a的值是{{numbers.a}}</h3>
+        <button @click="numbers.a++">點我讓a+1</button>
+        <h3>b的值是{{numbers.b}}</h3>
+        <button @click="numbers.b++">點我讓b+1</button>
+
+        <button>徹底替換掉numbers</button>
+
+    </div>
+    <!-- Vue實例 -->
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                isHot: true,
+                numbers: {
+                    a: 1,
+                    b: 2,
+                }
+            },
+            computed: {
+                info() {
+                    return this.isHot ? '炎熱' : '涼爽'
+                }
+            },
+            methods: {
+                chageWeather() {
+                    this.isHot = !this.isHot
+                }
+            },
+            // 監視
+            watch: {
+                // 正常寫法
+                isHot: {
+                    handler(newValue, oldValue) {
+                        console.log('isHot被改變了', newValue, oldValue)
+                    }
+                },
+                // 簡寫形式
+                // 函數名:監視的是誰
+                isHot(newValue, oldValue) {
+                    console.log('簡寫形式isHot被改變了', newValue, oldValue)
+                }
+            }
+        })
+
+        // 正常寫法
+        vm.$watch('isHot', {
+            handler(newValue, oldValue) {
+                console.log('ishot被改變了', newValue, oldValue)
+            }
+        })
+
+        // 簡寫
+        vm.$watch('isHot', function (newValue, oldValue) {
+            console.log('實例化方式ishot被改變了', newValue, oldValue)
+        }
+        )
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="root">
+        <form action="">
+            <label for='uid'>賬號:</label>
+            <!-- trim去除用戶輸入的前後的空格 -->
+            <input type="text" id="uid" v-model.trim="userInfo.uid"> <br />
+
+            <label for='pwd'>密碼:</label>
+            <input type="password" id="pwd" v-model="userInfo.pwd"> <br />
+
+            性別：
+            <label for="sexMan">男</label>
+            <input type="radio" name="sex" id="sexMan" value="man" v-model="userInfo.sex">
+            <label for="sexWoman">女</label>
+            <input type="radio" name="sex" id="sexWoman" value="woman" v-model="userInfo.sex"> <br />
+
+            年齡:
+            <!-- 第一個number:要求用戶輸入數字 -->
+            <!-- 第二個number:vue提供,會將用戶輸入的類型轉換成數字類型,而不是默認的字符串 -->
+
+            <input type="number" v-model.number="userInfo.age"> <br /> 
+
+            愛好：
+            <label for="hobbyStu">學習</label>
+            <input type="checkbox" name="" id="hobbyStu" v-model="userInfo.hobby" value="學習">
+            <label for="hobbyPlay"> 打遊戲</label>
+            <input type="checkbox" name="" id="hobbyPlay" v-model="userInfo.hobby" value="打遊戲">
+            <label for="hobbyEat"> 吃飯</label>
+            <input type="checkbox" name="" id="hobbyEat" v-model="userInfo.hobby" value="吃飯"> <br />
+
+
+            所屬校區：
+            <!-- 下拉框只需要把v-model寫在最外層的select元素標簽上 -->
+            <select name="" id="" v-model="userInfo.city">
+                <option value="beijing">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="shenzhen">深圳</option>
+            </select> <br />
+
+            其他信息：
+            <!-- lazy:懶收集,不是實時監測減少內存占用；失去焦點的時候才收集 -->
+            <textarea name="" id="" cols="30" rows="10" v-model.lazy="userInfo.other"></textarea> <br />
+
+            <input type="checkbox" name="" id="" v-model="userInfo.agree">閱讀並接受<a href="#">用戶協議</a> <br />
+
+            <!-- <button type="button">提交</button> -->
+            <button type="submit" @click.prevent="demo">提交</button>
+
+
+        </form>
+    </div>
+    <!-- Vue實例 -->
+    <script>
+        new Vue({
+            el: "#root",
+            data: {
+                userInfo: {
+                    uid: '',
+                    pwd: '',
+                    age: 12,
+                    sex: '',
+                    // 多選框需要把對應的v-model的屬性寫成數組
+                    hobby: [],
+                    city: 'beijing',
+                    other: '',
+                    agree: false
+                }
+
+            },
+            methods: {
+                demo() {
+                    // 點擊提交按鈕後輸出全部數據的JSON字符串格式數據
+                    // 一般不會直接訪問this._data
+                    console.log(JSON.stringify(this.userInfo));
+                }
+
+
+            }
+        });
+    </script>
+</body>
+
+</html>
